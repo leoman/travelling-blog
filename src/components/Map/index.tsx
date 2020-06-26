@@ -13,7 +13,7 @@ const Map: FunctionComponent<MapI> = ({ posts, hoveredLocationKey }: MapI): Reac
   const [ projection, setProjection ] = useState(null)
 
   // eslint-disable-next-line no-undef
-  const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyAJF1BL1LJ-ZTDQTqEY8ZtrLx-DF__P2GE'
+  const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ''
 
   const getMapBounds = () => {
     const bounds = new window.google.maps.LatLngBounds()	  
