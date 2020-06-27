@@ -50,3 +50,14 @@ export const LOGIN = gql`
     }
   }
 `;
+
+
+
+export const DELETE_POST = gql`
+  mutation deletePost($id: String!) {
+    login(id: $id) {
+      success
+      message
+    }
+  }
+`;
