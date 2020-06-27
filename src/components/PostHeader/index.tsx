@@ -1,13 +1,13 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 import { Post } from '../../types/post'
-import { Header, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles';
+import { Header, TitleWrapper, HoverWrapper, TextWrapper, Days, Title, Location } from './styles'
 
 interface Props {
   post: Post
 }
 
-export const PostHeader: React.FC = ({ post : { photo, location: { location }, date, title, titleColour } }: Props ): React.ReactElement => (
+export const PostHeader: React.FC<Props> = ({ post : { photo, location: { location }, date, title, titleColour } }: Props ): React.ReactElement => (
     <TitleWrapper
         style={{backgroundImage: `url(${photo})`}}
     >
@@ -21,6 +21,6 @@ export const PostHeader: React.FC = ({ post : { photo, location: { location }, d
             </HoverWrapper>
         </Header>
     </TitleWrapper>
-);
+)
 
-export default PostHeader;
+export default PostHeader

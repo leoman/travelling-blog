@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { ContentWrapper } from './styles'
 import ImageLightBox from './ImageLightBox'
 import ImageGallery from './ImageGallery'
-import { Post } from '../../types/post'
+import { Photo } from '../../types/photo'
 
 interface Props {
     content: string
-    photos: Post[]
+    photos: Photo[]
 }
 
 const PostContent: React.FC<Props> = ({ content, photos }: Props): React.ReactElement => {
 
-  const contentRef: React.Ref = React.createRef()
+  const contentRef: any = React.createRef()
 
   const [photoIndex, setPhotoIndex] = useState<number>(0)
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -29,7 +29,7 @@ const PostContent: React.FC<Props> = ({ content, photos }: Props): React.ReactEl
   }, [setLightBoxImages])
 
   const checkTargetClick = (e: React.MouseEvent<HTMLElement>) => {
-    const element = e.target
+    const element: any = e.target
     const dataId = element.getAttribute('data-image-id')
     if (dataId) {
       setIsOpen(true)

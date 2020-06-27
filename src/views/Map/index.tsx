@@ -8,7 +8,7 @@ import { MapViewWrapper, MapWrapper, ListWrapper, NavigationToggle, TitleWrapper
 
 const MapView: React.FC = () => {
 
-  const [ hoveredLocationKey, setHoveredLocationKey ] = useState<null>(null)
+  const [ hoveredLocationKey, setHoveredLocationKey ] = useState<null | number>(null)
   const [ fade, setFade ] = useState<boolean>(false)
   const [ navigationShown, setNavigationShown ] = useState<boolean>(true)
   const { loading, error, data } = useQuery(All_POSTS);

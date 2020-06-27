@@ -6,7 +6,7 @@ interface Props {
   fade: boolean
 }
 
-const Loading: React.FC = ({ fade }: Props): React.ReactElement => {
+const Loading: React.FC<Props> = ({ fade }: Props): React.ReactElement => {
 
   const TweenMax: any = (window as any).TweenMax;
   const TimelineMax: any = (window as any).TimelineMax;
