@@ -120,11 +120,11 @@ const ListView: React.FC = (): React.ReactElement => {
               </Tr>
             </Thead>
             <Tbody>
-              {data.allPosts.map(({ id, slug, title, date, status }: Post, i: number) => (
+              {data.allPosts.map(({ id, slug, title, order, status }: Post, i: number) => (
                 <Tr key={i.toString()}>
                   <Td>{title}</Td>
                   <Td>{status}</Td>
-                  <Td>{moment(Number(date)).format("MMMM Do YYYY")}</Td>
+                  <Td>{moment(Number(order)).format("MMMM Do YYYY")}</Td>
                   <Td>
                     <Link to={`/admin/posts/preview/${slug}`}>
                       <Button outline="true" color="primary">Preview</Button>

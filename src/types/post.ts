@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Location } from './location'
 import { Photo } from './photo'
 
@@ -23,4 +24,22 @@ export interface Post {
 export interface GeoPost extends Post {
   y: number
   x: number
+}
+
+export const initialState: Post = {
+  title: '',
+  titleColour: '',
+  content: '',
+  photo: '',
+  date: new Date(),
+  order: new Date(moment().format('YYYY-MM-DD')),
+  status: Status.draft,
+  location: { 
+      location: '',
+      duration: 0,
+      lat: 0, 
+      lng: 0,
+      hideFromBounding: false,
+  },
+  photos: [],
 }

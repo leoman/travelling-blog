@@ -1,7 +1,6 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { useParams, useHistory } from "react-router-dom"
-import { Link } from 'react-router-dom'
 import {
   Card,
   CardText,
@@ -34,7 +33,7 @@ const PostView: React.FC = (): React.ReactElement => {
       <ScrollProgress />
 
       <Card className="text-center" block color="info" backgroundColor={"d9534f"} >
-        <CardText>This is a preview! <a onClick={() => history.push("/admin/posts")}>Back to Posts</a>.</CardText>
+        <CardText>This is a preview! <button onClick={() => history.push("/admin/posts")}>Back to Posts</button>.</CardText>
       </Card>
 
       <PostHeader
