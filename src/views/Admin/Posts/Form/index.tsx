@@ -22,7 +22,7 @@ import {
 interface Props {
     post: Post
     onPostChange(post: Post): void
-    onSaveImage?(photo: string): void
+    onSaveImage?(photo: string): Promise<any>
     onDeleteImage?(id: number): Promise<any>
 }
 
@@ -79,43 +79,24 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
     setCurrentPhoto(value)
   }
 
-  const onAddphoto = async (e: any): Promise<void> => {
+  const onAddphoto = async (e: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault()
       
     if (onSaveImage) {
-      // const response = await onSaveImage(currentPhoto)
-        
-      //   const newPost = {
-      //       ...post,
-      //       photos: [
-      //           ...post.photos, { url: currentPhoto },
-      //       ]
-      //   }
-
-      // setPost(newPost)
-      // setCurrentPhoto('')
+      await onSaveImage(currentPhoto)
+      setCurrentPhoto('')
     }
   }
 
   const onPhotoDelete = async (id: number) => {
     if (onDeleteImage) {
-      const response = await onDeleteImage(id)
-
-      if (!response.data.errors) {
-        const newPost = {
-          ...post,
-          photos: [
-            ...post.photos.filter((photo: Photo) => photo.id !== id),
-          ]
-        }
-        setPost(newPost)
-      }
+      await onDeleteImage(id)
     }
   }
 
   const renderAddPostImage = (): React.ReactFragment => (
     <>
-      <button onClick={(e) => onAddphoto(e)}>Add </button>
+      <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => onAddphoto(e)}>Add </button>
       <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onPhotoUpdate(e.currentTarget.value)} value={currentPhoto} type="text" className="form-control" />
     </>
   )
@@ -131,7 +112,6 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
   }
 
   const confirmDelete = () => {
-    if (!idToDelete) return null
     onPhotoDelete(idToDelete)
     closeDeleteModal()
   }
@@ -163,6 +143,22 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
           </PostPhotosShow>
         </div>
       )
+    }
+  }
+
+  const onChangeLat = (value: string) => {
+    if (value !== '') {
+      onChange(parseFloat(value), 'lat', true)
+    } else {
+      onChange(value, 'lat', true)
+    }
+  }
+
+  const onChangeLng = (value: string) => {
+    if (value !== '') {
+      onChange(parseFloat(value), 'lng', true)
+    } else {
+      onChange(value, 'lng', true)
     }
   }
 
@@ -212,10 +208,10 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
           <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChange(Number(e.currentTarget.value), 'duration', true)} value={duration} type="text" className="form-control" />
       
           <InputGroupAddon>Lat</InputGroupAddon>
-          <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChange(Number(e.currentTarget.value), 'lat', true)} value={lat} type="text" className="form-control" />
+          <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChangeLat(e.currentTarget.value)} value={lat} type="number" className="form-control" />
       
           <InputGroupAddon>Lng</InputGroupAddon>
-          <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChange(Number(e.currentTarget.value), 'lng', true)} value={lng} type="text" className="form-control" />
+          <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChangeLng(e.currentTarget.value)} value={lng} type="number" className="form-control" />
       
           <InputGroupAddon>Status</InputGroupAddon>
           <Select value={status} onChange={(e: React.FormEvent<HTMLSelectElement>) => onChange(e.currentTarget.value, 'status')} >

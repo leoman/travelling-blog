@@ -17,6 +17,7 @@ import { Post } from '../../../../types/post'
 import Form from '../Form'
 import { ControlBar } from './styles'
 import { GET_POST, EDIT_POST, ADD_PHOTO, DELETE_PHOTO } from '../../../../queries'
+import { Photo } from '../../../../types/photo'
 
 const Edit: React.FC = (): React.ReactElement => {
 
@@ -25,8 +26,30 @@ const Edit: React.FC = (): React.ReactElement => {
   const [ message, setMessage ] = useState<string>('')
   const { loading, error, data } = useQuery(GET_POST, { variables: { id: id } })
   const [ editPost ] = useMutation(EDIT_POST)
-  const [ addPhoto ] = useMutation(ADD_PHOTO)
-  const [ deletePhoto ] = useMutation(DELETE_PHOTO)
+  const [ addPhoto ] = useMutation(ADD_PHOTO, {
+    update(cache, { data: { addPhoto } }) {
+      const { post } = cache.readQuery({ query: GET_POST, variables: { id: id } })
+      cache.writeQuery({
+        query: GET_POST,
+        data: { post: {
+          ...post,
+          photos: post.photos.concat([addPhoto])
+        } },
+      })
+    }
+  })
+  const [ deletePhoto ] = useMutation(DELETE_PHOTO, {
+    update(cache, { data: { deletePhoto } }) {
+      const { post } = cache.readQuery({ query: GET_POST, variables: { id: id } })
+      cache.writeQuery({
+        query: GET_POST,
+        data: { post: {
+          ...post,
+          photos: post.photos.filter((photo: Photo) => photo.id !== deletePhoto.id),
+        } },
+      })
+    }
+  })
 
   useEffect(() => {
     if (data && data.post) {
@@ -40,6 +63,7 @@ const Edit: React.FC = (): React.ReactElement => {
     const editPostVariables = {
       ...post,
       ...post.location,
+      order: new Date(Number(post.order))
     }
 
     try {
@@ -53,7 +77,7 @@ const Edit: React.FC = (): React.ReactElement => {
   }
 
   const onSaveImage = async (currentPhoto: string) => {
-    const response = await addPhoto({ variables: { id, photo: currentPhoto } })
+    const response = await addPhoto({ variables: { id, url: currentPhoto } })
 
     if(response.data.addPhoto) {
       setMessage('Post has been updated')

@@ -11,7 +11,7 @@ const MapView: React.FC = () => {
   const [ hoveredLocationKey, setHoveredLocationKey ] = useState<null | number>(null)
   const [ fade, setFade ] = useState<boolean>(false)
   const [ navigationShown, setNavigationShown ] = useState<boolean>(true)
-  const { loading, error, data } = useQuery(All_POSTS);
+  const { loading, error, data } = useQuery(All_POSTS, { variables: { status: 'live' } });
 
   if (!loading) {
     setTimeout(() => {

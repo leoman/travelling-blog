@@ -10,8 +10,8 @@ export const LOGIN = gql`
 `
 
 export const All_POSTS = gql`
-  query {
-    allPosts {
+  query allPosts($status: String) {
+    allPosts(status: $status) {
       id
       title
       slug
@@ -25,9 +25,6 @@ export const All_POSTS = gql`
         lat
         lng
         hideFromBounding
-      }
-      photos {
-        url
       }
     }
   }
@@ -52,6 +49,7 @@ export const GET_POST = gql`
         hideFromBounding
       }
       photos {
+        id
         url
       }
     }
@@ -168,6 +166,7 @@ export const DELETE_POST = gql`
 export const ADD_PHOTO = gql`
   mutation addPhoto($id: String!, $url: String!) {
     addPhoto(id: $id, url: $url) {
+      id
       url
     }
   }
@@ -178,6 +177,7 @@ export const DELETE_PHOTO = gql`
     deletePhoto(id: $id) {
       success
       message
+      id
     }
   }
 `
