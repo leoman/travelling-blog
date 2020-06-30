@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import { Post } from '../../../../types/post'
 import { Photo } from '../../../../types/photo'
-// import Editor from '../../../../components/Editor'
+import Editor from '../../../../components/Editor'
 import { MarkDownEditor, PostImagesContainer, PostPhotosShow, PhotoHeader, PostImage } from './styles'
 import {
     Form as FormWrapper,
@@ -136,7 +136,7 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
       
           <PostPhotosShow showPhotos={showPhotos}>
             <PostImagesContainer>
-              {photos.map((photo, i) => (
+              {photos.map((photo: Photo, i) => (
                 <li onClick={() => showDeleteModal(photo.id)} key={i}><PostImage src={photo.url} /></li>
               ))}
             </PostImagesContainer>
@@ -236,8 +236,7 @@ const Form: React.FC<Props> = ({ post, onPostChange, onSaveImage, onDeleteImage 
         <InputGroup>
           <InputGroupAddon>Content</InputGroupAddon>
           <MarkDownEditor>
-            <Input onChange={(e: React.FormEvent<HTMLInputElement>) => onChange(e.currentTarget.value, 'content')} value={content} type="text" className="form-control" />
-            {/* <Editor onChange={(e: any) => onChange(e, 'content')} value={content} /> */}
+            <Editor onChange={(value: string) => onChange(value, 'content')} value={content} />
           </MarkDownEditor>
         </InputGroup>
       </FormGroup>
