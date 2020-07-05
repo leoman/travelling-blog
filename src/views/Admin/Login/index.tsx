@@ -23,8 +23,8 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [message, setMessage] = useState<string>('')
-  const [loginUser] = useMutation(LOGIN);
-  const history = useHistory();
+  const [loginUser] = useMutation(LOGIN)
+  const history = useHistory()
 
   const onSubmit = async () => {
 
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
       if(!response.data.login.auth) {
         setMessage('Your login credentials were incorrect')
       } else {
-        localStorage.setItem('token', response.data.login.token);
+        localStorage.setItem('token', response.data.login.token)
         history.push("/admin/posts")
       }
     } catch(error) {

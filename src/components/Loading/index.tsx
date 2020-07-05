@@ -123,6 +123,7 @@ const Loading: React.FC<Props> = ({ fade }: Props): React.ReactElement => {
 
   useEffect(() => {
     setupLoadingAnimation()
+    // eslint-disable-next-line
   }, [element])
 
   return (

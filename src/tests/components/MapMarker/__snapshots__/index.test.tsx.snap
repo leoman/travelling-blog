@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapMarker should render when given the correct props 1`] = `
+<div
+  className="sc-AxjAm kruEfP"
+>
+  <a
+    className="sc-AxirZ dWhLQ"
+    hovered="true"
+    href="/posts/Tongariro-Crossing"
+    onClick={[Function]}
+    style={
+      Object {
+        "backgroundImage": "url(https://live.staticflickr.com/1959/44695030985_da4b577d9a_b.jpg)",
+      }
+    }
+  />
+</div>
+`;

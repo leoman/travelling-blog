@@ -26,6 +26,7 @@ const PostContent: React.FC<Props> = ({ content, photos }: Props): React.ReactEl
     })
 
     setLightBoxImages(lightBoxImages)
+    // eslint-disable-next-line
   }, [setLightBoxImages])
 
   const checkTargetClick = (e: React.MouseEvent<HTMLElement>) => {

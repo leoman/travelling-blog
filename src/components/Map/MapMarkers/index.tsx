@@ -61,6 +61,7 @@ const MapMarkers: React.FC<MapMarkersI> = ({ posts, map, projection, hoveredLoca
     return function cleanup() {
       removeEventListeners()
     }
+    // eslint-disable-next-line
   }, [initRender])
 
   console.count('Map Markers component')

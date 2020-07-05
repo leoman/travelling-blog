@@ -15,6 +15,15 @@ const client = new ApolloClient({
     })
   },
   uri: 'http://localhost:4000/graphql',
+  onError: ({ graphQLErrors }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message }) => {
+        if (message === "Context creation failed: Failed to authenticate token.") {
+          localStorage.removeItem('token')
+        }
+      })
+    }
+  }
 })
 
 ReactDOM.render(
