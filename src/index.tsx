@@ -5,6 +5,9 @@ import App from './App'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 
+// eslint-disable-next-line no-undef
+const uri = process.env.KIRSTY_AND_PETE_API_URI || 'http://localhost:4000/graphql'
+
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem('token')
@@ -14,7 +17,7 @@ const client = new ApolloClient({
       }
     })
   },
-  uri: 'http://localhost:4000/graphql',
+  uri: uri,
   onError: ({ graphQLErrors }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message }) => {
