@@ -6,9 +6,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 
 // eslint-disable-next-line no-undef
-const uri = process.env.KIRSTY_AND_PETE_API_URI || 'http://localhost:4000/graphql'
-// eslint-disable-next-line no-undef
-console.log(uri, process)
+const uri = process.env.NODE_ENV === 'production' ? 'https://kirstyandpete-api.herokuapp.com/graphql' : 'http://localhost:4000/graphql'
 
 const client = new ApolloClient({
   request: (operation) => {
