@@ -9,6 +9,7 @@ const Map: FunctionComponent<MapI> = ({ posts, hoveredLocationKey }: MapI): Reac
   const google = window.google
   let gmapScript: HTMLScriptElement | null
 
+  const [ script, setScript ] = useState<boolean>(false)
   const [ map, setMap ] = useState(null)
   const [ projection, setProjection ] = useState(null)
 
@@ -94,16 +95,20 @@ const Map: FunctionComponent<MapI> = ({ posts, hoveredLocationKey }: MapI): Reac
       gmapScript.src = `https://maps.googleapis.com/maps/api/js?key=${key}`
       const x = document.getElementsByTagName('script')[0]
       if(x.parentNode) x.parentNode.insertBefore(gmapScript, x)
-  
+      
       gmapScript.addEventListener('load', () => {
         initMap()
       })
+      setScript(true)
     }
   }
 
   useEffect(() => {
-    attachGoogleScript()
-  })
+    if (!script) {
+      attachGoogleScript()
+    }
+    // eslint-disable-next-line
+  }, [script])
 
   return (
     <MapWrapper>
