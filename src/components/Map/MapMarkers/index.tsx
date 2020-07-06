@@ -64,8 +64,6 @@ const MapMarkers: React.FC<MapMarkersI> = ({ posts, map, projection, hoveredLoca
     // eslint-disable-next-line
   }, [initRender])
 
-  console.count('Map Markers component')
-
   return (
     <MapMarkersWrapper>
       <MapMarkersOverlay>

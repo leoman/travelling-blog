@@ -104,9 +104,6 @@ const Map: FunctionComponent<MapI> = ({ posts, hoveredLocationKey }: MapI): Reac
   useEffect(() => {
     attachGoogleScript()
   })
-  
-
-  console.count('Map component')
 
   return (
     <MapWrapper>
