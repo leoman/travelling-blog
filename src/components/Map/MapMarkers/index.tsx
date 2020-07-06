@@ -31,24 +31,23 @@ const MapMarkers: React.FC<MapMarkersI> = ({ posts, map, projection, hoveredLoca
 
   const debouncedSetMarkerPixels = debounce(setMarkerPixels, 300)
 
-  const renderMarkers = () => {
-    console.log(markers)
-    return markers.map((post: GeoPost, i: number) => {
-      return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        <MapMarkerWrapper key={i} top={post.y} left={post.x} hovered={Boolean(i === hoveredLocationKey)}>
-          <MapMarker
-            key={i}
-            lat={post.location.lat}
-            lng={post.location.lng}
-            hovered={Boolean(i === hoveredLocationKey)}
-            post={post}
-          />
-        </MapMarkerWrapper>
-      )
-    })
-  }
+  const renderMarkers = () => markers.map((post: GeoPost, i: number) => {
+    const renderedMapMarkers = (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      <MapMarkerWrapper key={i} top={post.y.toString()} left={post.x.toString()} hovered={Boolean(i === hoveredLocationKey)}>
+        <MapMarker
+          key={i}
+          lat={post.location.lat}
+          lng={post.location.lng}
+          hovered={Boolean(i === hoveredLocationKey)}
+          post={post}
+        />
+      </MapMarkerWrapper>
+    )
+    return renderedMapMarkers
+  })
+  
 
   const addEventListeners = (): void => listenerList.forEach((listener: string) => map.addListener(listener, debouncedSetMarkerPixels))
 
