@@ -32,6 +32,7 @@ const MapMarkers: React.FC<MapMarkersI> = ({ posts, map, projection, hoveredLoca
   const debouncedSetMarkerPixels = debounce(setMarkerPixels, 300)
 
   const renderMarkers = () => {
+    console.log(markers)
     return markers.map((post: GeoPost, i: number) => {
       return (
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
